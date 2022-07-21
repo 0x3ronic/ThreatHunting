@@ -14,6 +14,6 @@ rule fake_html_login_phish
     
   condition:
   
-    ($a1) or ($a2) or ($a3)
+    all of them
     
 }
