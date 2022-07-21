@@ -1,0 +1,14 @@
+\\ Searches for file creations where an ISO file was mounted and created a .iso.lnk. This may create FP's if your users deal with ISO files (however, this should
+only be triggered by admins downloading ISO's for OS'. 
+
+DeviceFileEvents
+union DeviceEvents, DeviceFileEvents, DeviceProcessEvents
+| where ActionType == "FileCreated" 
+// ISO when mounted creates a file ending with .iso.lnk
+| where FileName endswith ".iso.lnk"
+| project Timestamp, DeviceName, FileName, InitiatingProcessCommandLine, FolderPath, FileOriginIP, FileOriginUrl, InitiatingProcessFileName, InitiatingProcessFolderPath,
+FileOriginReferrerUrl, PreviousFileName, PreviousFolderPath, InitiatingProcessAccountName, ReportId, DeviceId
+
+
+
+
