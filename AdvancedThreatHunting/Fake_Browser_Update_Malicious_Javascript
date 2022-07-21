@@ -1,0 +1,24 @@
+// Searches for common TTP for fake browser updates where wscript.exe is invoked to execute a malicious Javvascript
+
+union DeviceFileEvents, DeviceProcessEvents
+| where FileName in~ ("wscript.exe")
+| where ProcessCommandLine contains "Chrome" 
+or ProcessCommandLine contains "Edge"
+or ProcessCommandLine contains ".js" 
+| project Timestamp, DeviceName, ProcessCommandLine, InitiatingProcessFileName, DeviceId, ReportId
+
+// Source - https://twitter.com/0x3ronic/status/1495155352312197121
+
+
+
+
+// Malicious Javascript invoking wscript.exe to pull RAT and initiate C2
+
+union DeviceFileEvents, DeviceProcessEvents
+| where FileName in~ ("wscript.exe")
+| where ProcessCommandLine contains "HTTPRequest2.open" 
+or ProcessCommandLine contains "HTTPRequest2.send"
+or ProcessCommandLine contains "POST"
+| project Timestamp, DeviceName, ProcessCommandLine, InitiatingProcessFileName, DeviceId, ReportId
+
+// Source - https://twitter.com/0x3ronic/status/1495155352312197121
