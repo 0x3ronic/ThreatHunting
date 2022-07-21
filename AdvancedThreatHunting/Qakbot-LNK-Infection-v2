@@ -1,0 +1,9 @@
+// Qakbot HTML Smuggling .html > .zip > .lnk > .dll
+
+DeviceProcessEvents
+| where FileName in~ ("powershell.exe", "powershell_ise.exe", "cmd.exe")
+| where ProcessCommandLine contains "r1=regs&&" or ProcessCommandLine contains "%r1%vr32"
+| where ProcessCommandLine contains "call" or ProcessCommandLine contains "curl"
+| project Timestamp, DeviceName, InitiatingProcessCommandLine, InitiatingProcessFileName, AccountName, DeviceId, ReportId
+
+// Source - https://twitter.com/pr0xylife/status/1542172803662856195
