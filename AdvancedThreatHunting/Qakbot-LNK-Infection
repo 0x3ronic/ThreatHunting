@@ -1,0 +1,10 @@
+// Query to detect execution flow of common Qakbot execution flow via LNK infection
+// LNK > CMD > curl & ping & regsvr32 > regsvr32 > Explorer
+
+DeviceProcessEvents
+| where ProcessCommandLine contains "cmd.exe"
+| where ProcessCommandLine contains "curl" or ProcessCommandLine contains "ping"
+| where ProcessCommandLine contains @"regsvr32"
+| project Timestamp, DeviceName, ProcessCommandLine, AccountName, DeviceId, ReportId
+
+// Source: https://twitter.com/Max_Mal_/status/1536697935861362688
