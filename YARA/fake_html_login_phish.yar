@@ -2,8 +2,8 @@ rule fake_html_login_phish
 {
 
   meta:
-    
-    author = "whoi0x8"
+  
+    author = "0x3ronic"
     info = "Obfuscated JS file containing fake MS sign-in page connecting to malicous URL"
   
   strings:
