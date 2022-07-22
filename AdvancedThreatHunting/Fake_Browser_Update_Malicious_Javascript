@@ -4,7 +4,7 @@ union DeviceFileEvents, DeviceProcessEvents
 | where FileName in~ ("wscript.exe")
 | where ProcessCommandLine contains "Chrome" 
 or ProcessCommandLine contains "Edge"
-or ProcessCommandLine contains ".js" 
+and ProcessCommandLine contains ".js" 
 | project Timestamp, DeviceName, ProcessCommandLine, InitiatingProcessFileName, DeviceId, ReportId
 
 // Source - https://twitter.com/0x3ronic/status/1495155352312197121
@@ -18,7 +18,7 @@ union DeviceFileEvents, DeviceProcessEvents
 | where FileName in~ ("wscript.exe")
 | where ProcessCommandLine contains "HTTPRequest2.open" 
 or ProcessCommandLine contains "HTTPRequest2.send"
-or ProcessCommandLine contains "POST"
+and ProcessCommandLine contains "POST"
 | project Timestamp, DeviceName, ProcessCommandLine, InitiatingProcessFileName, DeviceId, ReportId
 
 // Source - https://twitter.com/0x3ronic/status/1495155352312197121
