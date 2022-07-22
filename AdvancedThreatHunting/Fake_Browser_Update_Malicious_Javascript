@@ -1,4 +1,4 @@
-// Searches for common TTP for fake browser updates where wscript.exe is invoked to execute a malicious Javvascript
+// Searches for common TTP for fake browser updates where wscript.exe is invoked to execute a malicious Javascript
 
 union DeviceFileEvents, DeviceProcessEvents
 | where FileName in~ ("wscript.exe")
