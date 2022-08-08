@@ -4,7 +4,7 @@ union DeviceFileEvents, DeviceEvents, DeviceImageLoadEvents
 // Excluding the Program folders to eliminate false positives
 | where FolderPath !contains "ProgramData" and FolderPath !contains "Program Files" and FolderPath !contains "Windows"
 // Exclude false positives where 'updateplatform.exe' (genuine AntiMalwarePlatformUpdate by MS) creates mpclient.dll files in the temp directory
-// | where InitiatingProcessFolderPath != @"c:\windows\softwaredistribution\download\install\updateplatform.exe"
+| where InitiatingProcessFolderPath != @"c:\windows\softwaredistribution\download\install\updateplatform.exe"
 | project Timestamp, DeviceName, ActionType, FolderPath, InitiatingProcessFileName, InitiatingProcessFolderPath, InitiatingProcessCommandLine, ProcessId,  DeviceId, ReportId
 
 // https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-windows-defender-to-load-cobalt-strike/ 
