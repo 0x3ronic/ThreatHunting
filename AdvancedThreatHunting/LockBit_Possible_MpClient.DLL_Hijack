@@ -1,14 +1,12 @@
 union DeviceFileEvents, DeviceEvents, DeviceImageLoadEvents
 // Search for a filename that contains 'mpclient.dll' or image loading from a folder path that ends with \mpclient.dll
 | where FileName contains "mpclient.dll" or FolderPath endswith @"\MpClient.DLL"
-
 // Excluding the Program folders to eliminate false positives
 | where FolderPath !contains @"Program Files\Microsoft Security Client" 
 and FolderPath !contains @"\Program Files (x86)\Windows Defender" 
 and FolderPath !contains @"\Program Files\Windows Defender"
 and FolderPath !contains @"\Microsoft\Windows Defender\Platform"
 and FolderPath !contains @"\Windows\ServiceProfiles\NetworkService"
-
 // Exclude false positives where 'updateplatform.exe' (genuine AntiMalwarePlatformUpdate by MS) creates mpclient.dll files in the temp directory
 | where InitiatingProcessFolderPath !contains @"\windows\softwaredistribution\download\install\updateplatform.exe"
 | project Timestamp, DeviceName, ActionType, FolderPath, InitiatingProcessFileName, InitiatingProcessFolderPath, InitiatingProcessCommandLine, ProcessId,  DeviceId, ReportId
